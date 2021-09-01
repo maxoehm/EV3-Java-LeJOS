@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 class BasicMotorOperationExample {
-
+//
     public static Logger LOGGER = LoggerFactory.getLogger(BasicMotorOperationExample.class);
 
     public static int DELAY = 2000; //2 Sedonds

@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class LEDPatternsExample {
-
+//
     public static Logger LOGGER = LoggerFactory.getLogger(LEDPatternsExample.class);
 
     public static void main(String[] args) {

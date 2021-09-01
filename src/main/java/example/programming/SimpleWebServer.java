@@ -9,7 +9,7 @@ import java.net.Socket;
 
 
 public class SimpleWebServer {
-
+//
   public static Logger LOGGER = LoggerFactory.getLogger(SimpleWebServer.class);
 
   public static final int PORT = 9000;

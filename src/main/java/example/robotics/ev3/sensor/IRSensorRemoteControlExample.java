@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class IRSensorRemoteControlExample {
-
+//
 	public static Logger LOGGER = LoggerFactory.getLogger(IRSensorRemoteControlExample.class);
 
 	//Configuration

@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class FractalTree {
-
+//
     public static Logger LOGGER = LoggerFactory.getLogger(FractalCircle.class);
 
     private GraphicsLCD g;

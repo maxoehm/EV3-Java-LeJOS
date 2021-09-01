@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class LCDShowJavaLogoExample {
-
+//
     public static Logger LOGGER = LoggerFactory.getLogger(LCDShowJavaLogoExample.class);
 
     public static GraphicsLCD lcd = LCD.getInstance();

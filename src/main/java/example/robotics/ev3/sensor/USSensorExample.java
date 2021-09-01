@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 public class USSensorExample {
 
 	public static Logger LOGGER = LoggerFactory.getLogger(USSensorExample.class);
-
+//
 	private static EV3UltrasonicSensor us1 = new EV3UltrasonicSensor(SensorPort.S1);
 
 	public static void main(String[] args) {

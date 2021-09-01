@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 public class TurnWithGyroSensorExample {
 
+	//
 	private static final Logger LOGGER = LoggerFactory.getLogger(TurnWithGyroSensorExample.class);
 
 	private static EV3GyroSensor gyroSensor = new EV3GyroSensor(SensorPort.S1);

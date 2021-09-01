@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class BatteryDemo {
-
+//
 	public static Logger LOGGER = LoggerFactory.getLogger(BatteryDemo.class);
 
 	public static void main(String[] args) {
