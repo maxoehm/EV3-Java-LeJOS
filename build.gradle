@@ -1,7 +1,7 @@
-//Gradle file library ev3dev-lang-java // Template project
 
 plugins {
     id 'java'
+    id 'application'
     id 'eclipse'
     id 'idea'
     id 'org.hidetake.ssh' version '2.10.1'
@@ -9,6 +9,10 @@ plugins {
     id "com.github.johnrengelman.shadow" version "4.0.3"
 }
 
+application {
+    mainClassName("example.MyFirstRobot")
+
+}
 version = '2.6.0'
 
 // Project definitions
