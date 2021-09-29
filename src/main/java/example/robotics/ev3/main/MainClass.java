@@ -1,30 +1,41 @@
 package example.robotics.ev3.main;
 
-import ev3dev.actuators.lego.motors.EV3LargeRegulatedMotor;
-import lejos.hardware.port.MotorPort;
+import ev3dev.sensors.ev3.EV3UltrasonicSensor;
+import lejos.hardware.port.SensorPort;
+import lejos.robotics.SampleProvider;
 
 public class MainClass {
 
-
-    final int motorSpeed = 200;
-
-
     public static void main(final String[] args) {
-        
-        System.out.println("Initialise Motors");
-        final EV3LargeRegulatedMotor motorLeft = new EV3LargeRegulatedMotor(MotorPort.A);
-        final EV3LargeRegulatedMotor motorRight = new EV3LargeRegulatedMotor(MotorPort.B);
-
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            public void run() {
-                System.out.println("Emergency Stop");
-                motorLeft.stop();
-                motorRight.stop();
-            }
-        }));
-
 
 
     }
-    
+
+    public static boolean sensorCheck() {
+
+        final EV3UltrasonicSensor sensor = new EV3UltrasonicSensor(SensorPort.S4);
+        final SampleProvider sampleProv = new getDistanceMode();
+        int distanz;
+
+
+        float [] sample = new float[sampleProv.sampleSize()];
+
+
+        }
+
+    }
+
+    private static class getDistanceMode implements SampleProvider {
+        @Override
+        public int sampleSize() {
+            return 0;
+        }
+
+        @Override
+        public void fetchSample(float[] sample, int offset) {
+
+        }
+
+
+    }
 }
