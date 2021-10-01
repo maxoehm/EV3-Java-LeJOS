@@ -71,19 +71,17 @@ public class MainClass {
         int distanceValue = 0;
 
         final int iteration_threshold = 100;
-        for (int i = 0; i <= iteration_threshold; i++) {
 
             float[] sample = new float[sp.sampleSize()];
             sp.fetchSample(sample, 0);
             distanceValue = (int) sample[0];
+            LOGGER.info("Iteration: {}", distanceValue);
 
-            LOGGER.info("Iteration: {}, Distance: {}", i, distanceValue);
+
+
             if (distanceValue >= 10) {
-                return  true;
+                return true;
             }
-
-            Delay.msDelay(500);
-        }
 
         return false;
     }
