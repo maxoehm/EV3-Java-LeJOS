@@ -30,7 +30,7 @@ public class MainClass {
 
     private static final EV3LargeRegulatedMotor motorLeft = new EV3LargeRegulatedMotor(MotorPort.A);
     private static final EV3LargeRegulatedMotor motorRight = new EV3LargeRegulatedMotor(MotorPort.B);
-
+    private static final Cartography map = new Cartography();
 
     public static void main(final String[] args) {
 
