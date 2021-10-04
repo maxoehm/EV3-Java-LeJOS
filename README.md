@@ -1,6 +1,7 @@
-# Template project with Gradle
+# EV3 Kartographierender Roboter
 
-## Why
+Autonomes abfahren eines Raumes und Abspeicherung von Informationen über die lokale Position, zur Kartogaphierung. 
+Zugriff ist dabei über einen Websever möglich, welcher mit dem Roboter kommuniziert und die in einem Mehrfach-Dimensionalem Array visualisiert. 
 
 Test a new technology is always a bit tedious and it requires an amount of time.
 So, this project try to reduce the curve of learning of any new user with `EV3Dev-lang-java`.
