@@ -6,6 +6,7 @@ import ev3dev.sensors.EV3Key;
 import ev3dev.sensors.ev3.EV3GyroSensor;
 import ev3dev.sensors.ev3.EV3UltrasonicSensor;
 import example.robotics.ev3.sensor.USSensorExample;
+import lejos.hardware.Sounds;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.robotics.SampleProvider;
@@ -92,14 +93,15 @@ public class MainClass {
             LOGGER.info("Iteration: {}", distanceValue);
 
             if (distanceValue >= 30) {
-                Sound.getInstance().beep();
+                Sound.getInstance().playTone(444, HALF_SECOND);
 
                 if (distanceValue >= 25) {
 
-                    Sound.getInstance().beep();
+
+                    Sound.getInstance().playTone(444, HALF_SECOND);
 
                     if (distanceValue >= 15) {
-                        Sound.getInstance().beep();
+                        Sound.getInstance().playTone(444, HALF_SECOND);
                         return true;
                     }
 
