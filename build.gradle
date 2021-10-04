@@ -10,7 +10,7 @@ plugins {
 }
 
 application {
-    mainClassName("example.MyFirstRobot")
+    mainClassName("example.robotics.ev3.main.MainClass")
 
 }
 version = '2.6.0'
