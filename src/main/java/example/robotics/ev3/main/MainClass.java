@@ -92,15 +92,15 @@ public class MainClass {
             distanceValue = (int) sample[0];
             LOGGER.info("Iteration: {}", distanceValue);
 
-            if (distanceValue >= 30) {
+            if (distanceValue <= 30) {
                 Sound.getInstance().playTone(444, HALF_SECOND);
 
-                if (distanceValue >= 25) {
+                if (distanceValue <= 25) {
 
 
                     Sound.getInstance().playTone(444, HALF_SECOND);
 
-                    if (distanceValue >= 15) {
+                    if (distanceValue <= 15) {
                         Sound.getInstance().playTone(444, HALF_SECOND);
                         return true;
                     }
