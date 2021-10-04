@@ -91,9 +91,24 @@ public class MainClass {
             distanceValue = (int) sample[0];
             LOGGER.info("Iteration: {}", distanceValue);
 
-            if (distanceValue >= 15) {
-                return true;
+            if (distanceValue >= 30) {
+                Sound.getInstance().beep();
+
+                if (distanceValue >= 25) {
+
+                    Sound.getInstance().beep();
+
+                    if (distanceValue >= 15) {
+                        Sound.getInstance().beep();
+                        return true;
+                    }
+
+                }
+
+
             }
+
+
 
         return false;
     }
