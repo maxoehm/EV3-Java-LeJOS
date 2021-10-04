@@ -77,8 +77,6 @@ public class MainClass {
             distanceValue = (int) sample[0];
             LOGGER.info("Iteration: {}", distanceValue);
 
-
-
             if (distanceValue >= 10) {
                 return true;
             }
@@ -131,7 +129,6 @@ public class MainClass {
 
             Delay.msDelay(HALF_SECOND);
         }
-
 
 
     }
