@@ -89,17 +89,19 @@ public class MainClass {
             distanceValue = (int) sample[0];
             LOGGER.info("Iteration: {}", distanceValue);
 
-            if (distanceValue >= 10) {
+            if (distanceValue >= 15) {
                 return true;
             }
 
         return false;
     }
 
-    private static void rotateRobot() {
+    private static void rotateRobot(EV3LargeRegulatedMotor rotateLR) {
 
-        motorLeft.rotate(90);
-        motorRight.rotate(90);
+        rotateLR.setSpeed(0);
+
+        motorLeft.forward();
+        motorRight.forward();
 
 
     }
@@ -118,16 +120,18 @@ public class MainClass {
         int iterationCounter = 0;
         boolean gyrosSuccess = true;
 
+        float [] sample = new float[sp.sampleSize()];
+
+
         while (gyrosSuccess) {
 
-            float [] sample = new float[sp.sampleSize()];
             sp.fetchSample(sample, 0);
             value = (int)sample[0];
 
             LOGGER.info("Gyro angle: {}", value);
 
             if(value > 90){
-                rotateRobot();
+                rotateRobot(motorRight);
                 Sound.getInstance().beep();
                 LOGGER.info("Rotated 90 degrees");
                 break;
