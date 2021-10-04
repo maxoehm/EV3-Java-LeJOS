@@ -18,6 +18,8 @@ import java.util.List;
 
 public class MainClass {
 
+    private static int HALF_SECOND = 500;
+    private static int LOOP_LIMIT = 100;
     private static int motorSpeed = 200;
 
     public static Logger LOGGER = LoggerFactory.getLogger(USSensorExample.class);
@@ -103,11 +105,9 @@ public class MainClass {
         motorLeft.forward();
         motorRight.forward();
 
-
     }
 
-    private static int HALF_SECOND = 500;
-    private static int LOOP_LIMIT = 100;
+
 
 
     private static void gyrosMoveValues() {
@@ -134,14 +134,14 @@ public class MainClass {
                 rotateRobot(motorRight);
                 Sound.getInstance().beep();
                 LOGGER.info("Rotated 90 degrees");
-                break;
+                gyrosSuccess = false;
             }
 
             //Avoid an infinite loop
             iterationCounter++;
             if (iterationCounter >= LOOP_LIMIT) {
                 LOGGER.debug("Breaking the loop if you didn't rotate in 100 iterations");
-                break;
+                gyrosSuccess = false;
             }
 
             Delay.msDelay(HALF_SECOND);
