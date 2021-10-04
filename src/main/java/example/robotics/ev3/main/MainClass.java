@@ -40,7 +40,6 @@ public class MainClass {
         motorLeft.setSpeed(motorSpeed);
         motorRight.setSpeed(motorSpeed);
 
-        final EV3Key returnButton = new EV3Key(EV3Key.BUTTON_BACKSPACE);
 
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
@@ -50,17 +49,31 @@ public class MainClass {
             }
         }));
 
+
+
+        final EV3Key leftButton = new EV3Key(EV3Key.BUTTON_LEFT);
+
+        if (leftButton.isDown()) {
+
+            wallie();
+
+        }
+
+
+    }
+
+    public static void wallie() {
+
+        final EV3Key returnButton = new EV3Key(EV3Key.BUTTON_BACKSPACE);
+
         do {
 
-            if (!sensorCheck()) {
+            if (sensorCheck()) {
                 motorLeft.forward();
                 motorRight.forward();
             } else {
-
-
-
+                gyrosMoveValues();
             }
-
         }while (returnButton.isUp());
 
     }
@@ -77,8 +90,6 @@ public class MainClass {
             distanceValue = (int) sample[0];
             LOGGER.info("Iteration: {}", distanceValue);
 
-
-
             if (distanceValue >= 10) {
                 return true;
             }
@@ -86,7 +97,7 @@ public class MainClass {
         return false;
     }
 
-    private static void wallie() {
+    private static void rotateRobot() {
 
         motorLeft.rotate(90);
         motorRight.rotate(90);
@@ -116,7 +127,8 @@ public class MainClass {
 
             LOGGER.info("Gyro angle: {}", value);
 
-            if(value >= 90){
+            if(value > 90){
+                rotateRobot();
                 Sound.getInstance().beep();
                 LOGGER.info("Rotated 90 degrees");
                 break;
@@ -131,7 +143,6 @@ public class MainClass {
 
             Delay.msDelay(HALF_SECOND);
         }
-
 
 
     }
