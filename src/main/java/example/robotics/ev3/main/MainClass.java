@@ -93,15 +93,15 @@ public class MainClass {
             LOGGER.info("Iteration: {}", distanceValue);
 
             if (distanceValue <= 30) {
-                Sound.getInstance().playTone(444, HALF_SECOND);
+                Sound.getInstance().playTone(440, HALF_SECOND);
 
                 if (distanceValue <= 25) {
 
 
-                    Sound.getInstance().playTone(444, HALF_SECOND);
+                    Sound.getInstance().playTone(440, HALF_SECOND);
 
                     if (distanceValue <= 15) {
-                        Sound.getInstance().playTone(444, HALF_SECOND);
+                        Sound.getInstance().playTone(440, HALF_SECOND);
                         return true;
                     }
 
@@ -147,10 +147,12 @@ public class MainClass {
 
             LOGGER.info("Gyro angle: {}", value);
 
-            if(value > 90){
+            if(value < 90){
                 rotateRobot(motorRight);
                 Sound.getInstance().beep();
                 LOGGER.info("Rotated 90 degrees");
+            } else {
+                Sound.getInstance().playTone(440, 1000);
                 gyrosSuccess = false;
             }
 
