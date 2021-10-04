@@ -49,15 +49,8 @@ public class MainClass {
             }
         }));
 
-
-
-        final EV3Key leftButton = new EV3Key(EV3Key.BUTTON_LEFT);
-
-        if (leftButton.isDown()) {
-
             wallie();
 
-        }
 
 
     }
