@@ -6,18 +6,17 @@ import ev3dev.sensors.EV3Key;
 import ev3dev.sensors.ev3.EV3GyroSensor;
 import ev3dev.sensors.ev3.EV3UltrasonicSensor;
 import example.robotics.ev3.sensor.USSensorExample;
-import lejos.hardware.Sounds;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.robotics.SampleProvider;
-import lejos.robotics.mapping.LineMap;
 import lejos.utility.Delay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
+import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainClass {
@@ -34,7 +33,9 @@ public class MainClass {
     private static final EV3LargeRegulatedMotor motorLeft = new EV3LargeRegulatedMotor(MotorPort.A);
     private static final EV3LargeRegulatedMotor motorRight = new EV3LargeRegulatedMotor(MotorPort.B);
 
-    private static final LineMap map = new LineMap();
+    private static HashMap map = new HashMap();
+    private static int index = 0;
+
 
     public static void main(final String[] args) {
 
@@ -73,6 +74,9 @@ public class MainClass {
 
     }
 
+    private static Double x = 0.0;
+    private static Double y = 0.0;
+
     public static void wallie() {
 
         final EV3Key returnButton = new EV3Key(EV3Key.BUTTON_BACKSPACE);
@@ -87,16 +91,16 @@ public class MainClass {
                 gyrosMoveValues();
             }
 
-            updateMap();
+            updateMap(x, y++);
         }while (returnButton.isUp());
 
     }
 
+    private static void updateMap(Double x, Double y) {
 
-    private static void updateMap() {
-
-
-
+        map.put(index, new Point2D.Double(x, y));
+        index++;
+        System.out.println(map.get(0));
 
     }
 
