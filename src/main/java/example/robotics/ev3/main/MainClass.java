@@ -10,10 +10,13 @@ import lejos.hardware.Sounds;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.robotics.SampleProvider;
+import lejos.robotics.mapping.LineMap;
 import lejos.utility.Delay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +34,7 @@ public class MainClass {
     private static final EV3LargeRegulatedMotor motorLeft = new EV3LargeRegulatedMotor(MotorPort.A);
     private static final EV3LargeRegulatedMotor motorRight = new EV3LargeRegulatedMotor(MotorPort.B);
 
+    private static final LineMap map = new LineMap();
 
     public static void main(final String[] args) {
 
@@ -54,13 +58,18 @@ public class MainClass {
 
 
 
+
         final EV3Key leftButton = new EV3Key(EV3Key.BUTTON_LEFT);
+
+        System.out.println("press LEFT to start the programme :)");
+
         while (true) {
                 if (leftButton.isDown()) {
 
                     wallie();
                 }
 }
+
 
     }
 
@@ -70,13 +79,31 @@ public class MainClass {
 
         do {
 
-            if (sensorCheck()) {
+            if (!sensorCheck()) {
+                defaultSettings();
                 motorLeft.forward();
                 motorRight.forward();
             } else {
                 gyrosMoveValues();
             }
+
+            updateMap();
         }while (returnButton.isUp());
+
+    }
+
+
+    private static void updateMap() {
+
+
+
+
+    }
+
+    private static void defaultSettings() {
+
+        motorLeft.setSpeed(motorSpeed);
+        motorRight.setSpeed(motorSpeed);
 
     }
 
@@ -92,25 +119,24 @@ public class MainClass {
             distanceValue = (int) sample[0];
             LOGGER.info("Iteration: {}", distanceValue);
 
-            if (distanceValue <= 30) {
+            Cartographer map = new Cartographer();
+            map.newPoint(distanceValue);
+
+            if (distanceValue <= 150) {
                 Sound.getInstance().playTone(440, HALF_SECOND);
 
-                if (distanceValue <= 25) {
+                if (distanceValue <= 100) {
 
+                    Sound.getInstance().playTone(523, HALF_SECOND);
 
-                    Sound.getInstance().playTone(440, HALF_SECOND);
-
-                    if (distanceValue <= 15) {
-                        Sound.getInstance().playTone(440, HALF_SECOND);
+                    if (distanceValue <= 60) {
+                        Sound.getInstance().playTone(659, HALF_SECOND);
                         return true;
                     }
 
                 }
 
-
             }
-
-
 
         return false;
     }
@@ -147,7 +173,7 @@ public class MainClass {
 
             LOGGER.info("Gyro angle: {}", value);
 
-            if(value < 90){
+            if(value < 80){
                 rotateRobot(motorRight);
                 Sound.getInstance().beep();
                 LOGGER.info("Rotated 90 degrees");
