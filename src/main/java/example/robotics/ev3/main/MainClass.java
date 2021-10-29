@@ -126,20 +126,16 @@ public class MainClass {
             Cartographer map = new Cartographer();
             map.newPoint(distanceValue);
 
-            if (distanceValue <= 150) {
+            if (distanceValue <= 170 && distanceValue >= 160) {
                 Sound.getInstance().playTone(440, HALF_SECOND);
+            }
+            else if (distanceValue <= 120 && distanceValue >= 110) {
 
-                if (distanceValue <= 100) {
-
-                    Sound.getInstance().playTone(523, HALF_SECOND);
-
-                    if (distanceValue <= 60) {
+                Sound.getInstance().playTone(523, HALF_SECOND);
+            }
+            else if (distanceValue <= 60) {
                         Sound.getInstance().playTone(659, HALF_SECOND);
                         return true;
-                    }
-
-                }
-
             }
 
         return false;
@@ -148,6 +144,7 @@ public class MainClass {
     private static void rotateRobot(EV3LargeRegulatedMotor rotateLR) {
 
         rotateLR.setSpeed(0);
+        LOGGER.info("rotateRobot ");
 
         motorLeft.forward();
         motorRight.forward();
@@ -176,13 +173,14 @@ public class MainClass {
             value = (int)sample[0];
 
             LOGGER.info("Gyro angle: {}", value);
-
             if(value < 80){
                 rotateRobot(motorRight);
                 Sound.getInstance().beep();
-                LOGGER.info("Rotated 90 degrees");
+
             } else {
-                Sound.getInstance().playTone(440, 1000);
+                Sound.getInstance().playTone(440, 100);
+                Sound.getInstance().playTone(523, 100);
+                Sound.getInstance().playTone(659, 100);
                 gyrosSuccess = false;
             }
 
