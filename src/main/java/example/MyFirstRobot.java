@@ -15,10 +15,7 @@ public class MyFirstRobot {
 
     private static int index = 0;
 
-    //static ServerSocket variable
-    private static ServerSocket server;
-    //socket server port on which it will listen
-    private static int port = 9876;
+
 
     public static EV3LargeRegulatedMotor motorLeft;
     public static EV3LargeRegulatedMotor motorRight;
@@ -29,41 +26,10 @@ public class MyFirstRobot {
          motorLeft = new EV3LargeRegulatedMotor(MotorPort.A);
          motorRight = new EV3LargeRegulatedMotor(MotorPort.B);
 
-        //create the socket server object
-        server = new ServerSocket(port);
-        //keep listens indefinitely until receives 'exit' call or program terminates
-        while(true){
-            System.out.println("Waiting for the client request");
-            //creating socket and waiting for client connection
-            Socket socket = server.accept();
-            //read from socket to ObjectInputStream object
-            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-            //convert ObjectInputStream object to String
-            String message = (String) ois.readObject();
-            System.out.println("Command Received: " + message);
-            //create ObjectOutputStream object
-            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-            //write object to Socket
-            oos.writeObject("Packaged received: "+message);
-            //close resources
-            ois.close();
-            oos.close();
-            interpretCommand(message);
-            //terminate the server if client sends exit request
-            if(message.equalsIgnoreCase("exit"))  {
-                socket.close();
-                break;
-            }
+         CommunicationServer communicationServer = new CommunicationServer();
+         communicationServer.start(66666);
 
-        }
-        //To Stop the motor in case of pkill java for example
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            public void run() {
-                System.out.println("Emergency Stop");
-            }
-        }));
 
-        System.exit(0);
     }
 
     private static void interpretCommand(String message) {
