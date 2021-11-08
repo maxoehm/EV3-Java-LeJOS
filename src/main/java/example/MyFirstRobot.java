@@ -1,59 +1,62 @@
 package example;
 
-import ev3dev.actuators.lego.motors.EV3LargeRegulatedMotor;
-import ev3dev.sensors.Battery;
-import lejos.hardware.port.MotorPort;
-import lejos.utility.Delay;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class MyFirstRobot {
 
-    public static void main(final String[] args){
+    private static int index = 0;
+
+    //static ServerSocket variable
+    private static ServerSocket server;
+    //socket server port on which it will listen
+    private static int port = 9876;
+
+    public static void main(String args[]) throws IOException, ClassNotFoundException {
 //
         System.out.println("Creating Motor A & B");
-        final EV3LargeRegulatedMotor motorLeft = new EV3LargeRegulatedMotor(MotorPort.A);
-        final EV3LargeRegulatedMotor motorRight = new EV3LargeRegulatedMotor(MotorPort.B);
+        //create the socket server object
+        server = new ServerSocket(port);
+        //keep listens indefinitely until receives 'exit' call or program terminates
+        while(true){
+            System.out.println("Waiting for the client request");
+            //creating socket and waiting for client connection
+            Socket socket = server.accept();
+            //read from socket to ObjectInputStream object
+            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            //convert ObjectInputStream object to String
+            String message = (String) ois.readObject();
+            System.out.println("Command Received: " + message);
+            //create ObjectOutputStream object
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            //write object to Socket
+            oos.writeObject("Packaged received: "+message);
+            //close resources
+            ois.close();
+            oos.close();
+            interpretCommand(message);
+            //terminate the server if client sends exit request
+            if(message.equalsIgnoreCase("exit"))  {
+                socket.close();
+                break;
+            }
 
+        }
         //To Stop the motor in case of pkill java for example
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
                 System.out.println("Emergency Stop");
-                motorLeft.stop();
-                motorRight.stop();
             }
         }));
 
-        System.out.println("Defining the Stop mode");
-        motorLeft.brake();
-        motorRight.brake();
-
-        System.out.println("Defining motor speed");
-        final int motorSpeed = 200;
-        motorLeft.setSpeed(motorSpeed);
-        motorRight.setSpeed(motorSpeed);
-
-        System.out.println("Go Forward with the motors");
-        motorLeft.forward();
-        motorRight.forward();
-
-        Delay.msDelay(2000);
-
-        System.out.println("Stop motors");
-        motorLeft.stop();
-        motorRight.stop();
-
-        System.out.println("Go Backward with the motors");
-        motorLeft.backward();
-        motorRight.backward();
-
-        Delay.msDelay(2000);
-
-        System.out.println("Stop motors");
-        motorLeft.stop();
-        motorRight.stop();
-
-        System.out.println("Checking Battery");
-        System.out.println("Votage: " + Battery.getInstance().getVoltage());
 
         System.exit(0);
+    }
+
+    private static void interpretCommand(String message) {
+        System.out.println(message);
     }
 }
