@@ -29,7 +29,7 @@ public class CommunicationServer {
 
     public String receiveMessage() throws IOException {
         if (in.readLine() != null) {
-            out.println("Received Command, executing");
+            out.println("Received Command, executing ");
             return in.readLine();
         }
         return "";

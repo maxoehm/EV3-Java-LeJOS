@@ -38,18 +38,58 @@ public class MainClass {
     }
 
     private static void interpretCommand(String message) {
+
+        String ms = message.toLowerCase();
         System.out.println(message);
 
-        if (Objects.equals(message, "vorne")) {
-            motorLeft.forward();
-            motorRight.forward();
+        if (Objects.equals(ms, "vorne")) {
+            do {
+                motorRight.forward();
+                motorLeft.forward();
+                communicationServer.sendMessage("Running...");
+            } while (motorLeft.getTachoCount() < 1);
+            motorLeft.stop();
+            motorRight.stop();
         }
 
-        if (Objects.equals(message, "ping")) {
+        if (Objects.equals(ms, "hinten")) {
+            motorLeft.backward();
+            motorRight.backward();
+            communicationServer.sendMessage("Running...");
+        }
+
+        if (Objects.equals(ms, "links")) {
+            do {
+                motorRight.forward();
+            } while (motorLeft.getTachoCount() < 1);
+            motorLeft.stop();
+        }
+
+        if (Objects.equals(ms, "rechts")) {
+            do {
+                motorRight.forward();
+            }  while (motorLeft.getTachoCount() < 1);
+                motorLeft.stop();
+        }
+
+        if (Objects.equals(ms, "ping")) {
         communicationServer.sendMessage("Pong!");
         }
 
+        if (Objects.equals(ms, "stop")) {
+            communicationServer.sendMessage("Stopped!");
 
+        }
+
+        if (Objects.equals(ms, "eine Methode")) {
+            communicationServer.sendMessage("Doing as you wishing");
+            eineMethode();
+        }
+
+    }
+
+    private static void eineMethode() {
+        LOGGER.info("Eine Methode wird gerade ausgeführt!");
     }
 
 }
