@@ -30,7 +30,6 @@ public class MainClass {
 
     private final static int motorSpeed = 200;
 
-
     private static CommunicationServer communicationServer;
 
     public static void main(String args[]) throws IOException, ClassNotFoundException, InterruptedException {
