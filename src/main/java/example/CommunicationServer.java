@@ -19,13 +19,24 @@ public class CommunicationServer {
         clientSocket = serverSocket.accept();
         out = new PrintWriter(clientSocket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        String greeting = in.readLine();
-        if ("hello server".equals(greeting)) {
-            out.println("hello client");
+        String response = in.readLine();
+        if ("conEv3".equals(response)) {
+            out.println("Connection successful, starting private listener  on port " + port);
+        } else {
+            out.println("Connection failed, closing connection");
         }
-        else {
-            out.println("unrecognised greeting");
+    }
+
+    public String receiveMessage() throws IOException {
+        if (in.readLine() != null) {
+            out.println("Received Command, executing");
+            return in.readLine();
         }
+        return "";
+    }
+
+    public void sendMessage(String message) {
+        out.println(message);
     }
 
     public void stop() throws IOException {

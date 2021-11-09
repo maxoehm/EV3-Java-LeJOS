@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyFirstRobot {
-
+/*
     private static int index = 0;
 
 
@@ -43,5 +43,5 @@ public class MyFirstRobot {
 
 
     }
-
+*/
 }
