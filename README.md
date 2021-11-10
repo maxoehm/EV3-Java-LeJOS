@@ -1,11 +1,10 @@
-# EV3 Kartographierender Roboter
-
+# EV3 Roboter - Webserver
 Autonomes abfahren eines Raumes und Abspeicherung von Informationen über die lokale Position, zur Kartogaphierung. 
 Zugriff ist dabei über einen Websever möglich, welcher mit dem Roboter kommuniziert und die in einem Mehrfach-Dimensionalem Array visualisiert. 
 
-Test a new technology is always a bit tedious and it requires an amount of time.
-So, this project try to reduce the curve of learning of any new user with `EV3Dev-lang-java`.
-
+Um die Roboter und Internetschnittstelle zu ist das Projekt otisrobot notwending.
+https://github.com/max-oehm/otisrobot/                                                                                                                                          
+    
 ## Prerequisites
 
 The Prerequisites to use this project are:
@@ -87,3 +86,5 @@ https://github.com/ev3dev-lang-java/examples
 If you have any problem or doubt, use the main project.
 
 https://github.com/ev3dev-lang-java/ev3dev-lang-java/issues
+
+
