@@ -1,9 +1,6 @@
-# EV3 Roboter - Webserver
-Autonomes abfahren eines Raumes und Abspeicherung von Informationen über die lokale Position, zur Kartogaphierung. 
-Zugriff ist dabei über einen Websever möglich, welcher mit dem Roboter kommuniziert und die in einem Mehrfach-Dimensionalem Array visualisiert. 
-
-Um die Roboter und Internetschnittstelle zu ist das Projekt otisrobot notwending.
-https://github.com/max-oehm/otisrobot/                                                                                                                                          
+# EV3 Robot - Web Server
+Autonomous traversal of a space and storage of information about the local position, for cartography. 
+Access is possible via a web server, which communicates with the robot and visualizes the data in a multi-dimensional array. The robot communicates via the following project https://github.com/max-oehm/otisrobot/                                                                                                                                          
     
 ## Prerequisites
 
